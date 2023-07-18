@@ -1,4 +1,8 @@
-
+# En construcción 
+## Aplicación de pacientes de veterinario
+- En proceso..
+- Login - Autenticación - Sesiones
+- Base de Datos --> MongoDB
 
 ## Backend
 - NodeJ + Express
