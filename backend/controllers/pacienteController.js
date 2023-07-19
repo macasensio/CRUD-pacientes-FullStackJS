@@ -8,7 +8,7 @@ const agregarPaciente = async (req, res) => {
     
     try {
         const pacienteGuardado = await paciente.save()
-        res.json({pacienteGuardado})
+        res.json(pacienteGuardado)
     } catch (error) {
         console.log(error)
     }
@@ -20,7 +20,7 @@ const obtenerPacientes = async (req, res) => {
         .where('veterinario')
         .equals(req.veterinario)
 
-    res.json({pacientes})
+    res.json(pacientes)
 }
 
 //GET
