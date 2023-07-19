@@ -9,7 +9,9 @@ const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [alerta, setAlerta] = useState('')
+    const [alerta, setAlerta] = useState({})
+
+    const {setAuth} = useAuth()
 
     const navigate = useNavigate()
 
@@ -26,10 +28,10 @@ const Login = () => {
 
         try {
             const {data} = await clienteAxios.post('/veterinarios/login', {email, password})
-            
-            localStorage.setItem('token', data.token)
-            
-            navigate('/admin')
+            localStorage.setItem('token', data.token) //guardar token en local storage
+
+            setAuth(data)
+            navigate('/admin') //redirigir a /admin
 
         } catch (error) {
             setAlerta({

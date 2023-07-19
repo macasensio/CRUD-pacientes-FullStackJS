@@ -13,7 +13,8 @@ const AuthProvider = ({children}) => {
             const token = localStorage.getItem('token')
             
             if(!token){
-                
+                setCargando(false)
+                return
             }
 
             const config = {
@@ -28,13 +29,17 @@ const AuthProvider = ({children}) => {
                 setAuth(data)
 
             } catch (error) {
-                console.log(error.response.data.msg)
                 setAuth({})
             }
             setCargando(false)
         }
         autenticarUsuario()
     }, [])
+
+    const cerrarSesion = () => {
+        localStorage.removeItem('token')
+        setAuth({})
+    }
 
 
     return (
@@ -43,6 +48,7 @@ const AuthProvider = ({children}) => {
                 auth,
                 setAuth,
                 cargando,
+                cerrarSesion
             }}
         >
             {children}
