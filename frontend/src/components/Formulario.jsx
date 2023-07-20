@@ -101,7 +101,7 @@ const Formulario = () => {
                         htmlFor="email"
                         className="text-gray-700 uppercase font-bold"
                     >
-                        Nombre Email
+                        Email
                     </label>
                     <input
                         type="email"
