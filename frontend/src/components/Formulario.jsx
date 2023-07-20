@@ -1,7 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Alerta from "./Alerta"
 import usePacientes from "../hooks/usePacientes"
-import clienteAxios from "../config/axios"
 
 const Formulario = () => {
 
@@ -10,10 +9,22 @@ const Formulario = () => {
     const [email, setEmail] = useState('')
     const [fecha, setFecha] = useState('')
     const [sintomas, setSintomas] = useState('')
+    const [id, setId] = useState(null)
 
     const [alerta, setAlerta] = useState({})
 
-    const { guardarPaciente } = usePacientes()
+    const { guardarPaciente, paciente } = usePacientes()
+
+    useEffect(() => {
+        if(paciente?.nombre){
+            setNombre(paciente.nombre)
+            setPropietario(paciente.propietario)
+            setEmail(paciente.email)
+            setFecha(paciente.fecha)
+            setSintomas(paciente.sintomas)
+            setId(paciente._id)
+        }
+    },[paciente])
 
 
     const handleSubmit = e => {
@@ -28,9 +39,16 @@ const Formulario = () => {
             return
         }
 
-        setAlerta({})
-        guardarPaciente({ nombre, propietario, email, fecha, sintomas })
-
+        guardarPaciente({ nombre, propietario, email, fecha, sintomas, id })
+        setAlerta({
+            msg: 'Guardado correctamente'
+        })
+        setNombre('')
+        setPropietario('')
+        setEmail('')
+        setFecha('')
+        setSintomas('')
+        setId('')
     }
 
     const { msg } = alerta
@@ -130,7 +148,7 @@ const Formulario = () => {
                 <input
                     type="submit"
                     className="bg-indigo-600 text-white w-full p-3 uppercase font-bold hover:bg-indigo-800 hover:cursor-pointer transition-colors rounded"
-                    value="Agregar Paciente"
+                    value={id ? "Guardas cambios" : "Agregar Paciente"}
                 />
             </form>
             {msg && <Alerta alerta={alerta} />}

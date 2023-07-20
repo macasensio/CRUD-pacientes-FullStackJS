@@ -4,7 +4,6 @@ import Paciente from "./Paciente"
 const ListadoPacientes = () => {
 
     const { pacientes } = usePacientes()
-    console.log(pacientes)
 
     return (
         <>
@@ -16,7 +15,7 @@ const ListadoPacientes = () => {
 
                     {pacientes.map(paciente => (
                         <Paciente 
-                            key={paciente._id}
+                            key={paciente.id}
                             paciente={paciente}
                         />
                     ))}
