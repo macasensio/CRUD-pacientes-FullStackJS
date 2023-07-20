@@ -1,6 +1,4 @@
-## Proyecto en construcción 
 ## Aplicación de pacientes de veterinario
-- En proceso..
 - Login - Autenticación - Sesiones
 - Base de Datos --> MongoDB
 
